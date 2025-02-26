@@ -1,17 +1,13 @@
+import "./Home.css"; // ✅ Ensure CSS is imported
 import RoleCard from "../components/RoleCard";
-import "./Home.css";
 
 function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 px-4">
-      <h1 className="text-3xl font-bold mb-6 text-center">
-        Welcome to University Platform
-      </h1>
-      <p className="text-gray-600 mb-8 text-center">
-        Select your role to continue
-      </p>
+    <div className="home-container">
+      <h1 className="home-title">Welcome to University Platform</h1>
+      <p className="home-subtitle">Select your role to continue</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="role-cards">
         <RoleCard role="Student" description="Join discussions, access schedules, and collaborate." icon="🎓" />
         <RoleCard role="Faculty" description="Engage with students, post announcements, and manage courses." icon="👨‍🏫" />
         <RoleCard role="Alumni" description="Connect with students, provide mentorship, and share career insights." icon="🏆" />
