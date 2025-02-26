@@ -8,7 +8,8 @@ const config = {
   database: process.env.DB_NAME,
   options: {
     encrypt: true,
-    enableArithAbort: true
+    enableArithAbort: true,
+    trustServerCertificate: true  // This should handle self-signed certificates
   }
 };
 
