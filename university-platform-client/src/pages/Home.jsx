@@ -1,4 +1,5 @@
 import RoleCard from "../components/RoleCard";
+import "./Home.css";
 
 function Home() {
   return (
