@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const HOST  = "http://localhost:3000"
-
 const Login = () => {
   const navigate = useNavigate();
   const [isRegistering, setIsRegistering] = useState(false);
@@ -23,7 +21,7 @@ const Login = () => {
       }
 
       try {
-        const response = await fetch(HOST+'/api/register', {
+        const response = await fetch('http://localhost:3000/api/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -41,7 +39,7 @@ const Login = () => {
         if (response.ok) {
           console.log("Registration successful:", data);
           // Redirect to login page or home page after successful registration
-          navigate('/');
+          navigate('/Dashboard'); // Redirect to login page
         } else {
           console.error("Registration failed:", data);
           alert(data.message);
@@ -51,14 +49,15 @@ const Login = () => {
       }
     } else {
       try {
-        const response = await fetch(HOST+'/api/login', {
+        const response = await fetch('http://localhost:3000/api/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             email,
-            password
+            password,
+            role
           })
         });
 
@@ -67,7 +66,7 @@ const Login = () => {
           console.log("Login successful:", data);
           // Store the access token and redirect to the home page
           localStorage.setItem('token', data.accessToken);
-          navigate('/');
+          navigate('/Dashboard'); // Redirect to dashboard or home page
         } else {
           console.error("Login failed:", data);
           alert(data.message);

@@ -1,6 +1,5 @@
 const User = require('../middleware/userModel');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 exports.register = (req, res) => {
@@ -15,7 +14,8 @@ exports.register = (req, res) => {
     fullname: req.body.fullname,
     email: req.body.email,
     contact: req.body.contact,
-    password: bcrypt.hashSync(req.body.password, 8)
+    password: bcrypt.hashSync(req.body.password, 8),
+  role: req.body.role
   });
 
   User.create(user, (err, data) => {
@@ -28,7 +28,7 @@ exports.register = (req, res) => {
 };
 
 exports.login = (req, res) => {
-  User.findByEmail(req.body.email, (err, data) => {
+  User.findByEmail(req.body.email,req.body.role, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
@@ -48,16 +48,13 @@ exports.login = (req, res) => {
         });
       }
 
-      const token = jwt.sign({ id: data.id }, process.env.JWT_SECRET, {
-        expiresIn: 86400 // 24 hours
-      });
+      // Log the JWT_SECRET to ensure it is loaded
 
       res.status(200).send({
         id: data.id,
         fullname: data.fullname,
         email: data.email,
-        contact: data.contact,
-        accessToken: token
+        contact: data.contact
       });
     }
   });
