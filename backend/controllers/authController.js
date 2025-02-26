@@ -12,8 +12,9 @@ exports.register = (req, res) => {
   }
 
   const user = new User({
-    username: req.body.username,
+    fullname: req.body.fullname,
     email: req.body.email,
+    contact: req.body.contact,
     password: bcrypt.hashSync(req.body.password, 8)
   });
 
@@ -53,8 +54,9 @@ exports.login = (req, res) => {
 
       res.status(200).send({
         id: data.id,
-        username: data.username,
+        fullname: data.fullname,
         email: data.email,
+        contact: data.contact,
         accessToken: token
       });
     }

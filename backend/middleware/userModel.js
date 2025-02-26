@@ -1,15 +1,17 @@
 const sql = require('../config/db');
 
 const User = function(user) {
-  this.username = user.username;
+  this.fullname = user.fullname;
   this.email = user.email;
+  this.contact = user.contact;
   this.password = user.password;
 };
 
 User.create = (newUser, result) => {
-  sql.query("INSERT INTO Users (fullname,username, email, password,contact) VALUES (@fullname,@username, @email, @password,@contact)", {
-    username: newUser.username,
+  sql.query("INSERT INTO Users (fullname, email, contact, password) VALUES (@fullname, @Email, @contact, @Password)", {
+    fullname: newUser.fullname,
     email: newUser.email,
+    contact: newUser.contact,
     password: newUser.password
   }, (err, res) => {
     if (err) {

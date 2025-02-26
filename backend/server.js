@@ -1,13 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const punycode = require('punycode');
-
+const cors = require('cors');
 const app = express();
 require('dotenv').config();
 
 // Parse requests of content-type - application/json
 app.use(bodyParser.json());
-
+app.use(cors());
 // Parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
